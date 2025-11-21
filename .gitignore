@@ -1,0 +1,41 @@
+# IDE settings
+/.project
+/.classpath
+/.settings/
+*.iml
+.idea/
+*.vscode/
+
+# Compiled classes and build output
+/build/
+/out/
+/target/
+*.class
+
+# Dependency directories
+/.gradle/
+/node_modules/
+/lib/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+*.war
+*.jar
+
+# Database or local dev
+/database/*.db
+/database/*.sqlite
+
+# Temporary files
+*.tmp
+*.swp
+*~ 
+
+# Secrets (se presente)
+.env

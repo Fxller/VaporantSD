@@ -440,14 +440,6 @@ Solution:
 
 ---
 
-## 📧 Contact & Support
-
-- **Project Repository**: [GitHub](https://github.com/yourusername/vaporant)
-- **Issue Tracker**: [GitHub Issues](https://github.com/yourusername/vaporant/issues)
-- **Email**: info@vaporant.com
-
----
-
 ## 🙏 Acknowledgments
 
 - Spring Boot Team for the excellent framework

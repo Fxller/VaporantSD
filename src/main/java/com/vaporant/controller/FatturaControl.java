@@ -2,7 +2,6 @@ package com.vaporant.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import jakarta.servlet.ServletException;

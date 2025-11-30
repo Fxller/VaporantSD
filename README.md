@@ -8,6 +8,7 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)](https://www.mysql.com/)
 [![Maven](https://img.shields.io/badge/Maven-3.9+-red.svg)](https://maven.apache.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 </div>
@@ -20,6 +21,7 @@
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
+- [🐳 Quick Start with Docker](#-quick-start-with-docker) ⭐ **Recommended**
 - [Installation](#-installation)
 - [Configuration](#️-configuration)
 - [Running the Application](#-running-the-application)
@@ -126,6 +128,53 @@ mvn -version
 mysql --version
 # Expected output: mysql  Ver 8.0.x
 ```
+
+---
+
+## 🐳 Quick Start with Docker
+
+**⭐ Recommended Method** - The easiest way to run Vaporant without installing MySQL locally!
+
+### What You Need
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
+- 4GB RAM available
+- 2GB free disk space
+
+### Launch in 2 Steps
+
+```bash
+# 1. Clone and navigate to project
+git clone https://github.com/yourusername/vaporant.git
+cd vaporant
+
+# 2. Start everything with one command!
+docker-compose up -d
+```
+
+That's it! 🎉
+
+- **Application**: http://localhost:8080
+- **Database**: Automatically initialized with sample data
+- **No configuration needed**: Everything works out of the box
+
+### Useful Commands
+
+```bash
+# View logs
+docker-compose logs -f
+
+# Stop application
+docker-compose down
+
+# Restart
+docker-compose restart
+
+# Reset database to initial state
+docker-compose down -v && docker-compose up -d
+```
+
+> 📖 **For detailed Docker documentation**, see [DOCKER_GUIDE.md](DOCKER_GUIDE.md)
 
 ---
 

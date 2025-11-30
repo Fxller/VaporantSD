@@ -1,0 +1,65 @@
+# ========================================
+# Docker Build Context Exclusions
+# ========================================
+# File e directory da escludere dal build context
+# per velocizzare il build e ridurre la dimensione dell'immagine
+
+# Target Maven e file di build
+target/
+*.war
+*.jar
+*.class
+
+# File di configurazione locale
+.env
+.env.local
+*.log
+*.tmp
+
+# IDE e editor
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
+.dockerignore
+
+# Documentazione (non necessaria nel container)
+README.md
+GUIDA_INSTALLAZIONE.md
+DOCKER_GUIDE.md
+*.md
+
+# Database locale
+database/storage.sql
+mysql-data/
+
+# Test
+src/test/
+
+# Build logs
+build_log.txt
+
+# SonarQube
+sonar-project.properties
+.scannerwork/
+
+# Temporary files
+*.bak
+*.backup
+*.orig

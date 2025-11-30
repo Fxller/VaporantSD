@@ -39,3 +39,7 @@ Thumbs.db
 
 # Secrets (se presente)
 .env
+
+# Docker volumes and data
+mysql-data/
+DOCKER_GUIDE.md

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @Repository
 public class OrderDaoImpl implements OrderDAO {
 	
-	private static final String TABLE = "Ordine";
+	private static final String TABLE = "ordine";
 	
 	@Autowired
 	private DataSource ds;

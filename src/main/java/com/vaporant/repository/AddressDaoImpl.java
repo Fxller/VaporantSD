@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @Repository
 public class AddressDaoImpl implements AddressDAO {
 	
-	private static final String TABLE = "Indirizzo";
+	private static final String TABLE = "indirizzo";
 	
 	@Autowired
 	private DataSource ds;

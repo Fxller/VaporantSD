@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 @Repository
 public class ContenutoDaoImpl implements ContenutoDAO{
-	private static final String TABLE = "Contenuto";
+	private static final String TABLE = "contenuto";
 	
 	@Autowired
 	private DataSource ds;

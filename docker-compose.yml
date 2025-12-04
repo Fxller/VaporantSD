@@ -1,0 +1,100 @@
+# ========================================
+# Docker Compose Configuration for VaporantSD
+# ========================================
+
+services:
+  # ========================================
+  # MySQL Database Service
+  # ========================================
+  mysql:
+    image: mysql:8.0
+    container_name: vaporant-mysql
+    restart: unless-stopped
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-vaporant_root_2024}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-storage}
+      MYSQL_USER: ${MYSQL_USER:-vaporant}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-vaporant_pass_2024}
+    
+    volumes:
+      # Persistenza dati database
+      - mysql-data:/var/lib/mysql
+      # Script di inizializzazione (eseguito solo al primo avvio)
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    
+    networks:
+      - vaporant-network
+    
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-vaporant_root_2024}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    
+    # Opzionale: esponi porta MySQL solo per debugging
+    # ports:
+    #   - "3306:3306"
+
+  # ========================================
+  # Vaporant Spring Boot Application
+  # ========================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vaporant-app
+    restart: unless-stopped
+    
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    
+    environment:
+      # Override configurazione database per Docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-storage}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-vaporant}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-vaporant_pass_2024}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      
+      # Configurazioni applicazione
+      SPRING_APPLICATION_NAME: vaporant
+      SERVER_PORT: 8080
+      
+      # JSP Configuration
+      SPRING_MVC_VIEW_PREFIX: /
+      SPRING_MVC_VIEW_SUFFIX: .jsp
+      
+      # Logging
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB: INFO
+      LOGGING_LEVEL_COM_VAPORANT: DEBUG
+    
+    depends_on:
+      mysql:
+        condition: service_healthy
+    
+    networks:
+      - vaporant-network
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+# ========================================
+# Networks
+# ========================================
+networks:
+  vaporant-network:
+    driver: bridge
+    name: vaporant-network
+
+# ========================================
+# Volumes
+# ========================================
+volumes:
+  mysql-data:
+    name: vaporant-mysql-data
+    driver: local

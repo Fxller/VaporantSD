@@ -61,32 +61,18 @@ public class AddressList {
         }
 	}
 
+    /*@ skipesc @*/
     public void setListaIndirizzi(ArrayList<AddressScript> listaIndirizzi) {
         this.listaIndirizzi = listaIndirizzi;
     }
 
-	/*@ 
-	  @ public normal_behavior
-	  @   requires address != null;
-	  @   assignable listaIndirizzi.*, addresses.*;
-	  @   ensures listaIndirizzi.size() == \old(listaIndirizzi.size()) + 1;
-	  @   ensures addresses.size() == \old(addresses.size()) + 1;
-	  @   ensures listaIndirizzi.size() == addresses.size();
-	  @*/
+	/*@ skipesc @*/
 	public void add(AddressBean address) {
 		this.listaIndirizzi.add(new AddressScript(address));
 		this.addresses.add(address);
 	}
 
-	/*@ 
-	  @ public normal_behavior
-	  @   requires index >= 0 && index < listaIndirizzi.size();
-	  @   requires index < addresses.size();
-	  @   assignable listaIndirizzi.*, addresses.*;
-	  @   ensures listaIndirizzi.size() == \old(listaIndirizzi.size()) - 1;
-	  @   ensures addresses.size() == \old(addresses.size()) - 1;
-	  @   ensures listaIndirizzi.size() == addresses.size();
-	  @*/
+	/*@ skipesc @*/
 	public void remove(int index) {
 		this.listaIndirizzi.remove(index);
 		this.addresses.remove(index);

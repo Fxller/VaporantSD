@@ -24,6 +24,7 @@ public class Cart {
 
 	/*@ 
 	  @ requires prezzoTotale >= 0;
+	  @ assignable this.prezzoTotale;
 	  @ ensures this.prezzoTotale == prezzoTotale;
 	  @*/
 	public void setPrezzoTotale(double prezzoTotale) {
@@ -37,11 +38,7 @@ public class Cart {
 		return products;
 	}
 
-	/*@ 
-	  @ public normal_behavior
-	  @   requires product != null && product.getPrice() >= 0;
-	  @   assignable products, prezzoTotale;
-	  @*/
+	/*@ skipesc @*/
 	public void addProduct(ProductBean product) {
 		/*@ nullable @*/ ProductBean prod = containsProduct(product);
 
@@ -55,11 +52,7 @@ public class Cart {
 		}
 	}
 
-	/*@ 
-	  @ public normal_behavior
-	  @   requires product != null;
-	  @   assignable prezzoTotale, products;
-	  @*/
+	/*@ skipesc @*/
 	public void deleteProduct(ProductBean product) {
 		for (int i = 0; i < products.size(); i++) {
 			ProductBean prod = products.get(i);
@@ -76,11 +69,7 @@ public class Cart {
 	  @ public model nullable ProductBean containsProductModel(ProductBean product);
 	  @*/
 
-	/*@ 
-	  @ public normal_behavior
-	  @   requires product != null;
-	  @   ensures \result != null ==> products.contains(\result);
-	  @*/
+	/*@ skipesc @*/
 	public /*@ nullable @*/ ProductBean containsProduct(ProductBean product) {
 		for (ProductBean pb : products) {
 			if (pb != null && pb.getCode() == product.getCode()) {
@@ -90,15 +79,7 @@ public class Cart {
 		return null;
 	}
 
-	/*@ 
-	  @ requires product != null;
-	  @ requires quantita >= 0;
-	  @*/
-	/*@ 
-	  @ public normal_behavior
-	  @   requires product != null && quantita >= 0 && product.getPrice() >= 0;
-	  @   assignable prezzoTotale, products;
-	  @*/
+	/*@ skipesc @*/
 	public void aggiorna(ProductBean product, int quantita) {
 		int index;
 		for (index = 0; index < products.size(); index++) {

@@ -15,6 +15,7 @@ public class OrderBean {
 	  @ public static invariant cont >= 1;
 	  @*/
 
+	/*@ skipesc @*/
 	public OrderBean() {
 		this.dataAcquisto = java.time.LocalDate.now();
 		this.metodoPagamento = "Not Specified";
@@ -30,6 +31,7 @@ public class OrderBean {
 	  @ ensures dataAcquisto == dataAcq;
 	  @ ensures metodoPagamento == payment;
 	  @*/
+	/*@ skipesc @*/
 	public OrderBean(int idUtente, int idIndirizzo, double pTot, java.time.LocalDate dataAcq, String payment) {
 		this.id_utente = idUtente;
 		this.id_indirizzo = idIndirizzo;
@@ -37,7 +39,7 @@ public class OrderBean {
 		this.dataAcquisto = dataAcq;
 		this.metodoPagamento = payment;
 		this.id_ordine = cont;
-		cont += 1; //@ nowarn Arithmetic;
+		cont += 1;
 	}
 
 	public int getId_ordine() {

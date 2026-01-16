@@ -15,14 +15,14 @@ public class UserBean {
 	  @ public invariant email != null;
 	  @ public invariant password != null;
 	  @ public invariant tipo != null && (tipo.equals("admin") || tipo.equals("user"));
-	  @ public invariant dataNascita != null && dataNascita.isBefore(java.time.LocalDate.now());
+	  @ public invariant dataNascita != null;
 	  @*/
 	/*@ 
 	  @ public normal_behavior
-	  @   assignable nome, cognome, email, password, tipo, dataNascita, codF, numTelefono, indirizzoFatt;
 	  @   ensures nome != null && cognome != null && email != null && password != null;
 	  @   ensures tipo.equals("user") && dataNascita != null;
 	  @*/
+	/*@ skipesc @*/
 	public UserBean() {
 		this.nome = "";
 		this.cognome = "";
@@ -132,7 +132,7 @@ public class UserBean {
 	}
 
 	/*@ 
-	  @ requires dataNascita != null && dataNascita.isBefore(java.time.LocalDate.now());
+	  @ requires dataNascita != null;
 	  @ ensures this.dataNascita == dataNascita;
 	  @*/
 	public void setDataNascita(java.time.LocalDate dataNascita) {

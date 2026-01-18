@@ -33,6 +33,21 @@ jobs:
           files: ./target/site/jacoco/jacoco.xml
           fail_ci_if_error: true
 
+      # Upload artifacts per SonarCloud
+      - name: Upload compiled classes
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-classes
+          path: target/classes
+          retention-days: 1
+
+      - name: Upload JaCoCo report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco
+          retention-days: 1
+
   sonarcloud:
     name: SonarQube Analysis
     runs-on: ubuntu-latest
